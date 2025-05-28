@@ -57,5 +57,11 @@ npm run dev         # Servidor de desarrollo
 npm run build       # Build de producción
 npm run lint        # Linter de código
 
+## 👤 Autor
+
+Neil Muñoz Lago  
+GitHub: [Neiland85](https://github.com/Neiland85)  
+© 2025
+
 📄 Licencia
-Apache
+Apache -2.0
