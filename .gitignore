@@ -12,6 +12,15 @@ dist
 dist-ssr
 *.local
 
+# npm/yarn/pnpm cache y lockfiles temporales
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.npm/
+.yarn/
+.pnpm/
+.cache/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
