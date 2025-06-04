@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server"
 import type { OCRProcessingResult, OCRInvoiceData } from "@/types/ocr"
 import { OcrInvoiceDataSchema } from "@/types/ocr"
-import fal from "@fal-ai/serverless"
+import { fal } from "@fal-ai/serverless-client"
 import { generateObject } from "ai"
 import { openai } from "@ai-sdk/openai"
 import { put } from "@vercel/blob" // Import Vercel Blob SDK
@@ -54,18 +54,18 @@ async function processOCRWithFalAndAI(file: File): Promise<OCRProcessingResult> 
       model: openai("gpt-4o"),
       schema: OcrInvoiceDataSchema,
       prompt: `Extract the following invoice data from the provided text. If a field is not found, omit it.
-      Ensure dates are in YYYY-MM-DD format if possible. Categorize the expense appropriately.
-      
-      Invoice Text:
-      ${rawOcrText}
-      
-      Expected fields: invoiceNumber, invoiceDate (YYYY-MM-DD), supplierName, supplierNIF, subtotal, vatRate, vatAmount, totalAmount, taxCategory (type, category, description, quarterlyReportingCode, annualReportingCode), deductibilityPercentage, items (description, quantity, unitPrice, totalPrice, vatRate).
-      
-      For taxCategory.category, use one of: "professional_services", "office_supplies", "travel_accommodation", "meals_entertainment", "equipment_software", "utilities", "rent", "insurance", "marketing_advertising", "training_education", "telecommunications", "vehicle_transport", "other_deductible".
-      For taxCategory.type, use "expense".
-      For quarterlyReportingCode and annualReportingCode, provide a plausible code if the category is clear, otherwise use "N/A".
-      For deductibilityPercentage, assume 100 unless it's 'meals_entertainment' (50).
-      `,
+    Ensure dates are in YYYY-MM-DD format if possible. Categorize the expense appropriately.
+    
+    Invoice Text:
+    ${rawOcrText}
+    
+    Expected fields: invoiceNumber, invoiceDate (YYYY-MM-DD), supplierName, supplierNIF, subtotal, vatRate, vatAmount, totalAmount, taxCategory (type, category, description, quarterlyReportingCode, annualReportingCode), deductibilityPercentage, items (description, quantity, unitPrice, totalPrice, vatRate).
+    
+    For taxCategory.category, use one of: "professional_services", "office_supplies", "travel_accommodation", "meals_entertainment", "equipment_software", "utilities", "rent", "insurance", "marketing_advertising", "training_education", "telecommunications", "vehicle_transport", "other_deductible".
+    For taxCategory.type, use "expense".
+    For quarterlyReportingCode and annualReportingCode, provide a plausible code if the category is clear, otherwise use "N/A".
+    For deductibilityPercentage, assume 100 unless it's 'meals_entertainment' (50).
+    `,
     })
 
     const processedData: OCRInvoiceData = {
