@@ -26,7 +26,7 @@ export async function authenticateAdmin(username: string, password: string): Pro
       id: "admin-1",
       username: "admin",
       password: "Admin@123456", // In a real app, this would be hashed
-      role: "admin" as const,
+      role: "admin" as const,,, 
       name: "Administrador",
       email: "admin@ejemplo.com",
     },
