@@ -14,27 +14,20 @@ export default function TributariAppLogo({ className }: { className?: string }) 
         animate={{ rotate: 360 }}
         transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
       >
-        {/* Outer circle - can be styled for light/dark mode if needed, or kept simple */}
-        <circle
-          cx="20"
-          cy="20"
-          r="18"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          className="text-petrol dark:text-petrol-light"
-        />
+        {/* Outer circle - uses primary color from theme */}
+        <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2.5" className="text-primary" />
         {/* Inner decorative element - example: a stylized 'T' or abstract shape */}
         <path
           d="M15 15 H 25 M20 15 V 28"
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
-          className="text-petrol-light dark:text-petrol"
+          className="text-primary-foreground" // Or a specific accent color if desired
         />
         {/* You can replace the path above with a more complex design if desired */}
       </motion.svg>
-      <span className="text-xl font-semibold text-petrol dark:text-petrol-light">
-        Tributari<span className="text-petrol-light dark:text-petrol">App</span>
+      <span className="text-xl font-semibold text-primary">
+        Tributari<span className="text-primary-foreground">App</span>
       </span>
     </div>
   )
